@@ -43,3 +43,7 @@ async def chat_endpoint(data: dict):
     inputs = {"user_input": data["message"]}
     result = graph.invoke(inputs)
     return {"reply": result["response"], "type": result["visitor_type"]}
+
+@app.get("/")
+async def root():
+    return {"status": "Agentic Brain is Online", "version": "1.0"}
