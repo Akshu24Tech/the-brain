@@ -58,7 +58,7 @@ Your Goals:
 
 # 5. CREATE THE LANGGRAPH AGENT
 tools = [get_my_github_projects]
-agent_executor = create_react_agent(llm, tools=tools, state_modifier=system_message)
+agent_executor = create_react_agent(llm, tools=tools, prompt=system_message)
 
 # 6. API MODELS & ENDPOINTS
 class ChatRequest(BaseModel):
@@ -66,7 +66,7 @@ class ChatRequest(BaseModel):
 
 @app.get("/")
 async def health_check():
-    return {"status": "online", "agent": "AI Agent"}
+    return {"status": "online", "agent": "Gemini-powered LangGraph Agent"}
 
 @app.post("/chat")
 async def chat_endpoint(request: ChatRequest):
