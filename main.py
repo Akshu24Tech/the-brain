@@ -5,7 +5,15 @@ from langgraph.graph import StateGraph, END
 from typing import TypedDict
 
 app = FastAPI()
+from fastapi.middleware.cors import CORSMiddleware
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # In production, replace "*" with your Lovable URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # 1. Define the State
 class AgentState(TypedDict):
     user_input: str
