@@ -1,5 +1,6 @@
 fastapi
 uvicorn
+langchain-google-genai
 langgraph
-langchain-openai
+requests
 pydantic
