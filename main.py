@@ -1,6 +1,7 @@
 import os
 import requests
 from fastapi import FastAPI
+from fastapi.responses import FileResponse # For serving the PDF
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
@@ -20,6 +21,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@tool
+def get_resume_link():
+    """
+    Use this tool when a user or recruiter asks for my resume, CV, or contact info.
+    It provides the official download link.
+    """
+    # This URL must match your Render URL + /download-resume
+    return "You can download my resume directly here: https://portfolio-brain-1.onrender.com/download-resume"
+    
 # 2. DEFINE TOOLS - This makes the agent "Autonomous"
 @tool
 def get_my_github_projects():
@@ -57,7 +67,7 @@ Your Goals:
 """
 
 # 5. CREATE THE LANGGRAPH AGENT
-tools = [get_my_github_projects]
+tools = [get_my_github_projects, provide_resume_link]
 agent_executor = create_react_agent(llm, tools=tools, prompt=system_message)
 
 # 6. API MODELS & ENDPOINTS
